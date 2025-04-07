@@ -1,33 +1,27 @@
-import { useState , FC} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState , FC, ChangeEvent} from 'react'
 import './App.css'
 
 const  App:FC = () => {
-  const [count, setCount] = useState(0)
+  const [task, setTask] = useState<string>("")
+  const[day, setday] = useState<number>(0)
+
+  const handleSubmit=()=>{
+    setTask(task)
+    setday(day)
+  }
+
+  const handleChange=(e:ChangeEvent<HTMLInputElement>)=>{
+   e.target.name=="task" ? setTask(e.target.value) : setday(Number(e.target.value))
+  }
+ 
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+<form onSubmit={handleSubmit}>
+  <input name='task' value={task} type='text' placeholder='Enter your text here' onChange={(e)=>handleChange(e)}></input>
+  <input name='day' value={day} type='number' placeholder='Days' onChange={(e)=>handleChange(e)}></input>
+<button type='submit'>Submit</button>
+</form>
     </>
   )
 }
