@@ -1,13 +1,24 @@
-import { useState , FC, ChangeEvent} from 'react'
+import { useState , FC, ChangeEvent, useEffect} from 'react'
 import './App.css'
+import { listType } from './appTypes'
+
 
 const  App:FC = () => {
   const [task, setTask] = useState<string>("")
   const[day, setday] = useState<number>(0)
+  const[list, setList] = useState<listType[]>([])
 
-  const handleSubmit=()=>{
-    setTask(task)
-    setday(day)
+  // useEffect(()=>{
+  //   console.log(list)
+  //   },[list])
+  console.log(list)
+
+  const handleSubmit=():void=>{
+    event?.preventDefault()
+   const newTask={taskName:task, workDay:day}
+   setList([...list, newTask])
+   setday(0)
+   setTask("")
   }
 
   const handleChange=(e:ChangeEvent<HTMLInputElement>)=>{
